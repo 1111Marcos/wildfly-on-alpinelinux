@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+UNAME=wildfly
+GNAME=$UNAME
+USER=$(id $UNAME 2>/dev/null)
+
+if [ -z "$USER" ]; 
+then
+  addgroup -S $GNAME 2>/dev/null
+  adduser -S -D -H -s /bin/false -G $GNAME -g $GNAME $UNAME 2>/dev/null;
+else
+  echo "USER Exists: " $UNAME;
+fi
+
+exit 0
