@@ -1,0 +1,6 @@
+#
+# wildfly-profile.sh
+#
+if [ -n "$1" ] && [ "$1" = "openrc-run" ]; then
+  export JBOSS_HOME=/opt/wildfly/preview-26.0.1
+fi

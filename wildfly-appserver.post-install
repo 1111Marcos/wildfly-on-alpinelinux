@@ -3,4 +3,20 @@
 set -e
 rc-update add wildfly default
 
+WILDFLYVER=29.0.1.Final
+
+cd /usr/wildfly
+tar xfz wildfly-${WILDFLYVER}.tar.gz
+
+cd wildfly-${WILDFLYVER}
+mv * ../${WILDFLYVER}
+mv .[A-Z,a-z,0-9]* ../${WILDFLYVER}
+
+cd /usr/wildfly
+chown root:root -R ./${WILDFLYVER}
+chown root:wildfly -R ./${WILDFLYVER}/standalone
+
+rmdir wildfly-${WILDFLYVER} 
+rm -f wildfly-${WILDFLYVER}.tar.gz
+
 exit 0

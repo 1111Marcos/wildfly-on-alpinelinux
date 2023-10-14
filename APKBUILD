@@ -34,7 +34,7 @@ check() {
 
 package() {
 
-	mkdir -p "$pkgdir"/etc/init.d
+	install -Dm0755 -g root "$srcdir"/../wildfly.profiled "$pkgdir"/etc/profile.d/wildfly-profile.sh
 	install -Dm0755 -g root "$srcdir"/../wildfly.initd "$pkgdir"/etc/init.d/wildfly
 
 	install -d -m755 -g root "$pkgdir"/usr/wildfly/${wildflyver}

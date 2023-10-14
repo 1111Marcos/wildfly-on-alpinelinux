@@ -8,10 +8,16 @@ depend() {
 }
 
 checkconfig () {
-    export JBOSS_HOME=/opt/wildfly/preview-26.0.1
+    #export JBOSS_HOME=/opt/wildfly/preview-26.0.1
+    . /etc/profile.d/wildfly-profile.sh openrc-run
 
-    if [ ! -n "$JBOSS_HOME" ] ; then
-        eerror "JBOSS_HOME not configured"
+    if [ -z "$JBOSS_HOME" ] ; then
+        eerror "JBOSS_HOME environment doesn't setted."
+        return 1
+    fi
+
+    if [ ! -d "$JBOSS_HOME" ] ; then
+        eerror "JBOSS_HOME directory doesns't exists: ${JBOSS_HOME}"
         return 1
     fi
     return 0
@@ -26,8 +32,13 @@ start () {
     start-stop-daemon --start --quiet --background \
         --make-pidfile --pidfile $WILDFLY_PIDFILE \
 	--env LAUNCH_JBOSS_IN_BACKGROUND="" \
-        --user root \
+        --user $WILDFLY_USER \
         --start "$COMMAND"
+
+    ## PID Workaround
+    sleep 1
+    WILDFLY_PID=$(pgrep -f jboss)
+    echo $WILDFLY_PID > $WILDFLY_PIDFILE
     eend $?
 }
 
