@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 UNAME=wildfly
 GNAME=$UNAME
 USER=$(id $UNAME 2>/dev/null)

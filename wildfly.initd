@@ -1,11 +1,15 @@
 #!/sbin/openrc-run
 
+WILDFLY_PIDFILE=/run/wildfly.pid
+WILDFLY_USER=wildfly
+
 depend() {
     need net
 }
 
 checkconfig () {
-    export JBOSS_HOME=/opt/wildfly/preview-26.0.1/
+    export JBOSS_HOME=/opt/wildfly/preview-26.0.1
+
     if [ ! -n "$JBOSS_HOME" ] ; then
         eerror "JBOSS_HOME not configured"
         return 1
@@ -21,8 +25,9 @@ start () {
     ebegin "Starting ${SVCNAME}"
     start-stop-daemon --start --quiet --background \
         --make-pidfile --pidfile $WILDFLY_PIDFILE \
-        --user ${WILDFLY_USER} \
-        --exec "${COMMAND}"
+	--env LAUNCH_JBOSS_IN_BACKGROUND="" \
+        --user root \
+        --start "$COMMAND"
     eend $?
 }
 
