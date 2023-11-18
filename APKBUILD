@@ -24,7 +24,6 @@ prepare() {
         if [ -e ~/web-cache/${_TARFILE}.sha1 ];then
            rm -f ~/web-cache/${_TARFILE}.sha1
         fi
-        #wget -P ~/web-cache/ https://github.com/wildfly/wildfly/releases/download/${_wildflyver}/wildfly-${_wildflyver}.tar.gz.sha1
         wget -P ~/web-cache/ https://github.com/wildfly/wildfly/releases/download/${_wildflyver}/${_TARFILE}.sha1
 
         _SHA1SUM=$(sha1sum ~/web-cache/${_TARFILE} | cut -f1 -d' ' 2>/dev/null || echo "sha1sum_calculated_error")
@@ -35,7 +34,6 @@ prepare() {
         fi
 
         if [ ! -e ~/web-cache/${_TARFILE} ]; then
-	   #wget -P ~/web-cache/ https://github.com/wildfly/wildfly/releases/download/${_wildflyver}/wildfly-${_wildflyver}.tar.gz
 	   wget -P ~/web-cache/ https://github.com/wildfly/wildfly/releases/download/${_wildflyver}/${_TARFILE}
         fi
 
