@@ -8,7 +8,6 @@ depend() {
 }
 
 checkconfig () {
-    #export JBOSS_HOME=/opt/wildfly/preview-26.0.1
     . /etc/profile.d/wildfly-profile.sh openrc-run
 
     if [ -z "$JBOSS_HOME" ] ; then
