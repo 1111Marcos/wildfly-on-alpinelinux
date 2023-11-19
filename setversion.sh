@@ -12,7 +12,9 @@ if [ $# -eq 0 ]; then
    cat << EOF
 
 setversion.sh:
-This is a break to help you understand version upgrade of apk. Changing script vars:
+This is a break to help you understand version upgrade/downgrade of this package.
+
+Changing variables on setversion.sh script:
    --o OLDPKGVERSION=1.29.0
    --o NEWPKGVERSION=1.30.0
    --o OLDWILDFLYVERSION=29.0.1.Final
